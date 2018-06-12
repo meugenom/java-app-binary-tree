@@ -90,7 +90,7 @@ public class Matrix {
 
 	public double[][] setMatrix(double a[][]) {
 		matrix = a;
-		// wenn die Dimensionen der Ã¼bergegebenen Matrix mit X und Y Ã¼berienstimmen,
+		// wenn die Dimensionen der übergegebenen Matrix mit X und Y überienstimmen,
 		// dann setze die Matrix, andernfalls ... (Error?)
 		return matrix;
 	}
@@ -194,7 +194,7 @@ public class Matrix {
 	 public Matrix multiple(Matrix b) throws Exception{
 			
 		 if (this.M != b.N) {
-				throw new IllegalArgumentException("Die Anzahl der Spalten der Matrix a mÃ¼ssen der Anzahl der reihen von matrix B gleichen.");
+				throw new IllegalArgumentException("Die Anzahl der Spalten der Matrix a müssen der Anzahl der reihen von matrix B gleichen.");
 		}					 
 		 
 		//a(am,an)x b(bm,bn) =  c(bm, an)

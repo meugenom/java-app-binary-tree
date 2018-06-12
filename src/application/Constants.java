@@ -21,7 +21,7 @@ public final class Constants {
     public static double StartLength = 70;    
            
     //for future realization 
-    public  static int  Iteration = 3;
+    public  static int  Iteration = 1;
     public  static boolean  Random = false;
     public  static int  Delay = 1;
     
