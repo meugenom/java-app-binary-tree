@@ -1,4 +1,4 @@
-package application;
+package application.config;
 
 public final class Constants {    
     
@@ -15,17 +15,29 @@ public final class Constants {
     
     
     //start point from where gets tree
-    public  static double  StartPointX = 400;
-    public  static double  StartPointY = 520;
+    public  static double  StartPointX = 360;
+    public  static double  StartPointY = 590;
     
-    public static double StartLength = 70;    
-           
+    
+    //quadrants sides a,b 
+    public static double a = 100.0;
+    public static double b = 100.0;
+    		
+    //public static double pointAX = 0.0;
+    //public static double pointAY = 0.0;
+    
+    public static double pointAX = 360.0;
+    public static double pointAY = 590.0;
+
+
     //for future realization 
-    public  static int  Iteration = 1;
+    public  static int  Iteration = 2;
     public  static boolean  Random = false;
     public  static int  Delay = 1;
     
     //orientation of vector
     public static double ConvertAngle = Math.PI/180;    
     public  static double  Angle = 45.0;
+    
+
 }

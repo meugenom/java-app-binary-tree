@@ -1,5 +1,6 @@
-package application;
+package application.extended;
 
+import application.config.Constants;
 import libraries.Matrix;
 
 public class MatrixExtended extends Matrix{
@@ -35,4 +36,5 @@ public class MatrixExtended extends Matrix{
 		this.set(0, 0, aY);
 		this.set(0, 1, aX);		
 	}
+	
 }
