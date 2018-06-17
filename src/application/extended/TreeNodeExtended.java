@@ -8,6 +8,7 @@ public class TreeNodeExtended<T> extends TreeNode<T>{
 	public TreeNodeExtended<T> parent;
 	public int level; 
 	public int count;
+	public boolean rotateSide;
 	
 	
 	public T AB;
@@ -26,26 +27,28 @@ public class TreeNodeExtended<T> extends TreeNode<T>{
 		this.AB = null;
 		this.BC = null;
 		this.CD = null;
-		this.DA = null;		
+		this.DA = null;
+		
+		this.rotateSide = false;
 	}
 		
 	
 	
 	//method for search parent node for some child node
-	public TreeNodeExtended<Vector> searchParent(TreeNodeExtended<Vector> node, TreeNodeExtended<Vector> child) {
+	public TreeNodeExtended<T> searchParent(TreeNodeExtended<T> node, TreeNodeExtended<T> child) {
 		if(node.left != null) {
 			if(node.left == child) {
-				return (TreeNodeExtended<Vector>) node.left;
+				return (TreeNodeExtended<T>) node.left;
 			} else {
-				searchParent((TreeNodeExtended<Vector>) node.left, child);
+				searchParent((TreeNodeExtended<T>) node.left, child);
 			}
 		}
 		
 		if(node.right != null) {
 			if(node.right == child) {
-				return (TreeNodeExtended<Vector>) node.right;
+				return (TreeNodeExtended<T>) node.right;
 			} else {
-				searchParent((TreeNodeExtended<Vector>) node.right, child);
+				searchParent((TreeNodeExtended<T>) node.right, child);
 			}
 		}
 		

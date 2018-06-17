@@ -23,7 +23,7 @@ public class Matrix {
 	
 	// overloading method
 	// Konstruktor
-	public Matrix(int m /* Zeilen/rows */, int n /* Spalten/columns*/) throws Exception{
+	public Matrix(int m /* Zeilen/rows */, int n /* Spalten/columns*/) {
 		
 		//try {
 			
@@ -36,8 +36,8 @@ public class Matrix {
 				
 				setHash(m, n);				
 			} 
-			else
-				throw new Exception(": m or n < 0");										
+			//else
+				//throw new Exception(": m or n < 0");										
 
 	}
 	
@@ -90,7 +90,7 @@ public class Matrix {
 
 	public double[][] setMatrix(double a[][]) {
 		matrix = a;
-		// wenn die Dimensionen der übergegebenen Matrix mit X und Y überienstimmen,
+		// wenn die Dimensionen der ï¿½bergegebenen Matrix mit X und Y ï¿½berienstimmen,
 		// dann setze die Matrix, andernfalls ... (Error?)
 		return matrix;
 	}
@@ -108,7 +108,7 @@ public class Matrix {
 	}
 
 	// addition matrices
-	public Matrix add(Matrix b) throws Exception{
+	public Matrix add(Matrix b){
 
 		Matrix c = new Matrix(M, N);
 		
@@ -130,7 +130,7 @@ public class Matrix {
 		
 	
 		}else {
-			throw new Exception("matrices with different M and N can`t be add");			
+			//throw new Exception("matrices with different M and N can`t be add");			
 		} 
 		
 		return c;
@@ -138,7 +138,7 @@ public class Matrix {
 	}
 
 	// sub matrices
-	public Matrix sub(Matrix b) throws Exception{
+	public Matrix sub(Matrix b) {
 
 		Matrix c = new Matrix(M, N);
 		
@@ -160,14 +160,14 @@ public class Matrix {
 				key++;
 			}		
 		} else {
-			throw new Exception("matrices with different M and N can`t be subtract");
+			//throw new Exception("matrices with different M and N can`t be subtract");
 		}
 		
 		return c;
 	}
 
 	// scale matrices
-	public Matrix scale(double factor) throws Exception{
+	public Matrix scale(double factor){
 
 		Matrix c = new Matrix(M, N);
 
@@ -194,7 +194,7 @@ public class Matrix {
 	 public Matrix multiple(Matrix b) throws Exception{
 			
 		 if (this.M != b.N) {
-				throw new IllegalArgumentException("Die Anzahl der Spalten der Matrix a müssen der Anzahl der reihen von matrix B gleichen.");
+				//throw new IllegalArgumentException("Die Anzahl der Spalten der Matrix a mï¿½ssen der Anzahl der reihen von matrix B gleichen.");
 		}					 
 		 
 		//a(am,an)x b(bm,bn) =  c(bm, an)
@@ -230,7 +230,7 @@ public class Matrix {
 
 	
 	// transposing matrices
-	public Matrix transpose() throws Exception{
+	public Matrix transpose() {
 
 		Matrix c = new Matrix(M, N);
 		

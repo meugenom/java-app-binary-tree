@@ -31,13 +31,14 @@ public final class Constants {
 
 
     //for future realization 
-    public  static int  Iteration = 2;
+    public  static int  Iteration = 1;
     public  static boolean  Random = false;
     public  static int  Delay = 1;
     
     //orientation of vector
     public static double ConvertAngle = Math.PI/180;    
-    public  static double  Angle = 45.0;
+    public  static double  AngleLeft = 135.0;
+    public  static double  AngleRight = -45.0;
     
 
 }

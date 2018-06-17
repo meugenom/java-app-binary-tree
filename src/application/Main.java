@@ -8,7 +8,7 @@ import application.config.Constants;
 import application.controllers.DrawShapesController;
 import application.controllers.TreeController;
 import application.extended.TreeNodeExtended;
-import application.extended.VectorExtended;
+import application.extended.Line;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -50,12 +50,12 @@ public class Main extends Application {
 		
 		//calculation our tree
 		TreeController calculateTree = new TreeController();
-		List<TreeNodeExtended<VectorExtended>> listNode = new ArrayList<TreeNodeExtended<VectorExtended>>();
-		listNode = calculateTree.main();
+		TreeNodeExtended<Line> node = new TreeNodeExtended<Line>();
+		node = calculateTree.main();
 		
 		//draw shapes
 		DrawShapesController drawShapes = new DrawShapesController();
-		drawShapes.draw(gc, listNode);
+		drawShapes.draw(gc, node);
 				
 		// graphics content apply
 		gc.stroke();

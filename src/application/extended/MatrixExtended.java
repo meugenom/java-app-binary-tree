@@ -7,7 +7,7 @@ public class MatrixExtended extends Matrix{
 
 	Matrix rotateMatrix = new Matrix(2,2);
 	
-	public MatrixExtended(int m, int n) throws Exception {
+	public MatrixExtended(int m, int n){
 		super(m, n);
 	}
 		 
@@ -21,7 +21,10 @@ public class MatrixExtended extends Matrix{
 		double aY = this.get(0, 0)*rotateMatrix.get(1, 0) + this.get(0, 1)*rotateMatrix.get(1, 1);
 				
 		this.set(0, 0, aX);
-		this.set(0, 1, aY);		
+		this.set(0, 1, aY);	
+		
+		//this.set(0, 0, aY);
+		//this.set(0, 1, aX);	
 	}
 	
 	public void rotateRight(double angle) {
@@ -32,6 +35,9 @@ public class MatrixExtended extends Matrix{
 		
 		double aX = this.get(0, 0)*rotateMatrix.get(0, 0) + this.get(0, 1)*rotateMatrix.get(0, 1); 
 		double aY = this.get(0, 0)*rotateMatrix.get(1, 0) + this.get(0, 1)*rotateMatrix.get(1, 1);
+		
+		//x1=x*cos(angle)-y*sin(angle); 
+		//y1=y*cos(angle)+x*sin(angle);
 				
 		this.set(0, 0, aY);
 		this.set(0, 1, aX);		
