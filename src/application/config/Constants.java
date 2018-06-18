@@ -14,31 +14,21 @@ public final class Constants {
     public static int CanvasHeight = 600;
     
     
-    //start point from where gets tree
-    public  static double  StartPointX = 360;
-    public  static double  StartPointY = 590;
-    
-    
     //quadrants sides a,b 
-    public static double a = 100.0;
-    public static double b = 100.0;
-    		
-    //public static double pointAX = 0.0;
-    //public static double pointAY = 0.0;
-    
+    public static double a = 150.0;
+    public static double b = 150.0;
+    		    
     public static double pointAX = 360.0;
-    public static double pointAY = 590.0;
+    public static double pointAY = 490.0;
 
 
     //for future realization 
-    public  static int  Iteration = 1;
+    public  static int  Iteration = 10;
     public  static boolean  Random = false;
     public  static int  Delay = 1;
     
     //orientation of vector
     public static double ConvertAngle = Math.PI/180;    
-    public  static double  AngleLeft = 135.0;
-    public  static double  AngleRight = -45.0;
+    public  static double  Angle =  45.0;    
     
-
 }

@@ -62,12 +62,12 @@ public class TreeController {
 	}
 	
 	
-	private void calculateRightChild(TreeNodeExtended<Line> node) {
+	private void calculateLeftChild(TreeNodeExtended<Line> node) {
 		
 		TreeNodeExtended<Line> parent = node.parent;
 		
 		//scaling factor
-		double factor = Math.sin(Constants.AngleLeft * Constants.ConvertAngle);						
+		double factor = Math.sin(Constants.Angle * Constants.ConvertAngle);						
 		//scale line relatively point A 
 	
 		Vector A = new Vector(parent.AB.start.getX(), parent.AB.start.getY());
@@ -75,96 +75,76 @@ public class TreeController {
 		Vector C = new Vector(parent.CD.start.getX(), parent.CD.start.getY());
 		Vector D = new Vector(parent.DA.start.getX(), parent.DA.start.getY());
 		
-		
-		double width = new Line(A, B).length();
-		double heigth = new Line(B, C).length();
-		
-		
-		/*
-		 * Scale square in right corner point B
-		 */
-		
-		//vector BA
-		Line BA = new Line(B, A);
-		BA.scale(factor);
-		B = new Vector(BA.start.getX(), BA.start.getY());
-		A = new Vector(BA.end.getX(), BA.end.getY());
-		
-		
-		//vector BC
-		Line BC = new Line(B, C);
-		BC.scale(factor);
-		C = new Vector(BC.end.getX(), BC.end.getY());
-		
-		//BD vector
-		Line BD = new Line(B, D);
-		BD.scale(factor);
-		D = new Vector(BD.end.getX(), BD.end.getY());
-		
-		
-		Line DA = new Line(D, A);
-		BC = new Line(B, C);
-		Line CD = new Line(C, D);
-		Line AB = new Line(A, B);
-		
-	
-		//relate shape to point B -> D
-		//translate left square
-		
-		BA.translateLeft(width, heigth);
-		A = new Vector(BA.end.getX(), BA.end.getY());
-		B = new Vector(BA.start.getX(), BA.start.getY());
-		
-		BD.translateLeft(width, heigth);
-		D = new Vector(BD.end.getX(), BD.end.getY());
-		
-		BC.translateLeft(width, heigth);
-		C = new Vector(BC.end.getX(), BC.end.getY());
-		
-		
-		AB = new Line(A, B);
-		BC = new Line(B, C);
-		CD = new Line(C, D);
-		DA = new Line(D, A);
-		
+		double h = D.getY() - A.getY();
+		double w = D.getX() - A.getX();
+						
 		
 		//rotate square
-		// BA
-		MatrixExtended currentMatrix = new MatrixExtended(1, 2);
-		currentMatrix.set(0, 0, A.getX() - B.getX());
-		currentMatrix.set(0, 1, B.getY() - A.getY() );
-		currentMatrix.rotateLeft(Constants.AngleRight);
-		A.setX(currentMatrix.get(0, 0) + B.getX());
-		A.setY(currentMatrix.get(0, 1) + B.getY());
-		
-		
-		//BC
-		currentMatrix = new MatrixExtended(1, 2);
-		currentMatrix.set(0, 0, C.getX() - B.getX());
-		currentMatrix.set(0, 1,  B.getY() - C.getY());
-		currentMatrix.rotateRight(Constants.AngleRight);
-		C.setX(currentMatrix.get(0, 0) + B.getX());
-		C.setY(currentMatrix.get(0, 1) + B.getY());
-				
-		
-		//BD
-		currentMatrix = new MatrixExtended(1, 2);
-		currentMatrix.set(0, 0, D.getX() - B.getX());
-		currentMatrix.set(0, 1,  B.getY() - D.getY());
-		currentMatrix.rotateRight(Constants.AngleRight);
-		D.setX(currentMatrix.get(0, 0) + B.getX());
-		D.setY(currentMatrix.get(0, 1) + B.getY());
-		
-		
-		
-		AB = new Line(A, B);
-		DA = new Line(D, A);
-		BC = new Line(B, C);
-		CD = new Line(C, D);
-		
-
-		
-		//out
+		//by vectors AB, AC, AD
+			//AB			
+			MatrixExtended currentMatrix = new MatrixExtended(1, 2);
+			currentMatrix.set(0, 0, B.getX() - A.getX());
+			currentMatrix.set(0, 1, B.getY() - A.getY() );
+			currentMatrix.rotate(Constants.Angle);
+			B.setX(currentMatrix.get(0, 0) + A.getX());
+			B.setY(currentMatrix.get(0, 1) + A.getY());
+			
+			
+			//AC
+			currentMatrix = new MatrixExtended(1, 2);
+			currentMatrix.set(0, 0, C.getX() - A.getX());
+			currentMatrix.set(0, 1,  C.getY() - A.getY());
+			currentMatrix.rotate(Constants.Angle);
+			C.setX(currentMatrix.get(0, 0) + A.getX());
+			C.setY(currentMatrix.get(0, 1) + A.getY());
+					
+			
+			//AD
+			currentMatrix = new MatrixExtended(1, 2);
+			currentMatrix.set(0, 0, D.getX() - A.getX());
+			currentMatrix.set(0, 1,  D.getY() - A.getY());
+			currentMatrix.rotate(Constants.Angle);
+			D.setX(currentMatrix.get(0, 0) + A.getX());
+			D.setY(currentMatrix.get(0, 1) + A.getY());
+			
+			
+			 Line AB = new Line(A, B);
+			 Line DA = new Line(D, A);
+			 Line BC = new Line(B, C);
+			 Line CD = new Line(C, D);
+			 
+			 //translate from A to D point		
+			A.translate(w, h);
+			B.translate(w, h);
+			C.translate(w, h);
+			D.translate(w, h);
+			
+			//scaling shape
+			
+			//vector AB
+			AB = new Line(A, B);
+			AB.scale(factor);
+			A = new Vector(AB.start.getX(), AB.start.getY());
+			B = new Vector(AB.end.getX(), AB.end.getY());
+			
+			
+			//vector AC
+			Line AC = new Line(A, C);
+			AC.scale(factor);
+			C = new Vector(AC.end.getX(), AC.end.getY());
+			
+			//AD vector
+			Line AD = new Line(A, D);
+			AD.scale(factor);
+			D = new Vector(AD.end.getX(), AD.end.getY());
+						
+			DA = new Line(D, A);
+			BC = new Line(B, C);
+			CD = new Line(C, D);
+			AB = new Line(A, B);
+			
+			
+				//out
 		node.AB = AB;
 		node.BC = BC;
 		node.CD = CD;
@@ -174,12 +154,13 @@ public class TreeController {
 	}
 	
 	
-	private void calculateLeftChild(TreeNodeExtended<Line> node) {
+	private void calculateRightChild(TreeNodeExtended<Line> node) {
 		
 		TreeNodeExtended<Line> parent = node.parent;
 		
+		
 		//scaling factor
-		double factor = Math.sin(Constants.AngleLeft * Constants.ConvertAngle);						
+		double factor = Math.sin(Constants.Angle * Constants.ConvertAngle);						
 		//scale line relatively point A 
 	
 		Vector A = new Vector(parent.AB.start.getX(), parent.AB.start.getY());
@@ -188,81 +169,102 @@ public class TreeController {
 		Vector D = new Vector(parent.DA.start.getX(), parent.DA.start.getY());
 		
 		
-		double width = new Line(A, B).length();
-		double heigth = new Line(B, C).length();
-		
-		/*
-		 * Scale square
-		 */
-		Line AB = new Line(A, B);
-		AB.scale(factor);
-		B = new Vector(AB.end.getX(), AB.end.getY());
-		
-		//AC vector for calculations
-		Line AC = new Line(A, C);
-		AC.scale(factor);
-		C = new Vector(AC.end.getX(), AC.end.getY());
-		
-		//AD vector
-		Line AD = new Line(A, D);
-		AD.scale(factor);
-		D = new Vector(AD.end.getX(), AD.end.getY());
-		
-		Line DA = new Line(D, A);
-		Line BC = new Line(B, C);
-		Line CD = new Line(C, D);
-		
-		
-		
-		
-		//translate AB AC AD
-		AB.translateRight(width, heigth);
-		A = new Vector(AB.start.getX(), AB.start.getY());
-		B = new Vector(AB.end.getX(), AB.end.getY());
-		
-		AC.translateRight(width, heigth);
-		C = new Vector(AC.end.getX(), AC.end.getY());
-		
-		AD.translateRight(width, heigth);
-		D = new Vector(AD.end.getX(), AD.end.getY());
-		
-		AB = new Line(A, B);
-		DA = new Line(D, A);
-		BC = new Line(B, C);
-		CD = new Line(C, D);
+		double cY = C.getY();
+		double cX = C.getX();
 		
 		//rotate square
-		// AB, AC, AD
-		MatrixExtended currentMatrix = new MatrixExtended(1, 2);
-		currentMatrix.set(0, 0, B.getX() - A.getX());
-		currentMatrix.set(0, 1, A.getY() - B.getY() );
-		currentMatrix.rotateRight(Constants.AngleLeft);
-		B.setX(currentMatrix.get(0, 0) + A.getX());
-		B.setY(currentMatrix.get(0, 1) + A.getY());
-		
-		
-		//AC			
-		currentMatrix = new MatrixExtended(1, 2);
-		currentMatrix.set(0, 0, C.getX() - A.getX());
-		currentMatrix.set(0, 1,  C.getY() - A.getY());
-		currentMatrix.rotateRight(Constants.AngleLeft);
-		C.setX(currentMatrix.get(0, 0) + A.getX());
-		C.setY(currentMatrix.get(0, 1) + A.getY());
-		
-		//AD
-		currentMatrix = new MatrixExtended(1, 2);
-		currentMatrix.set(0, 0, D.getX() - A.getX());
-		currentMatrix.set(0, 1,  D.getY() - A.getY());
-		currentMatrix.rotateRight(Constants.AngleLeft);
-		D.setX(currentMatrix.get(0, 0) + A.getX());
-		D.setY(currentMatrix.get(0, 1) + A.getY());
-		
-		
-		AB = new Line(A, B);
-		DA = new Line(D, A);
-		BC = new Line(B, C);
-		CD = new Line(C, D);
-		
+				// //by vectors BA, BC, BD
+				
+				MatrixExtended currentMatrix = new MatrixExtended(1, 2);
+				currentMatrix.set(0, 0, B.getX() - A.getX());
+				currentMatrix.set(0, 1, B.getY() - A.getY() );
+				currentMatrix.rotate(Constants.Angle);
+				A.setX(currentMatrix.get(0, 0) + B.getX());
+				A.setY(currentMatrix.get(0, 1) + B.getY());
+				
+				
+				//BC			
+				currentMatrix = new MatrixExtended(1, 2);
+				currentMatrix.set(0, 0, B.getX() - C.getX());
+				currentMatrix.set(0, 1,  B.getY() - C.getY());
+				currentMatrix.rotate(Constants.Angle);
+				C.setX(currentMatrix.get(0, 0) + B.getX());
+				C.setY(currentMatrix.get(0, 1) + B.getY());
+				
+				//BD
+				currentMatrix = new MatrixExtended(1, 2);
+				currentMatrix.set(0, 0, B.getX() - D.getX());
+				currentMatrix.set(0, 1,  B.getY() - D.getY());
+				currentMatrix.rotate(Constants.Angle);
+				D.setX(currentMatrix.get(0, 0) + B.getX());
+				D.setY(currentMatrix.get(0, 1) + B.getY());
+				
+				
+				//!!! RIGHT SIDE  back coordinates  need rewrite A" B" C" D" 		
+				/*
+				 * normal situation
+				 * AB = new Line(A, B);
+				 * DA = new Line(D, A);
+				 * BC = new Line(B, C);
+				 * CD = new Line(C, D);
+				 * 
+				 * 
+				 *  mutation A -> B"
+				 *  mutation B -> C"
+				 *  mutation C -> D"
+				 *  mutation D -> A"  
+				 */
+				
+				Line AB = new Line(D, A);		
+				Line BC = new Line(A, B);
+				Line CD = new Line(B, C);
+				Line DA = new Line(C, D);
+				
+				//from C" to C
+				double w = cX - C.getX();
+				double h = cY - C.getY();
+				
+				 //translate from A to D point		
+				A.translate(w, h);
+				B.translate(w, h);
+				C.translate(w, h);
+				D.translate(w, h);
+				
+				//scale
+				//vector CA
+				Line CA = new Line(C, A);
+				CA.scale(factor);
+				C = new Vector(CA.start.getX(), CA.start.getY());
+				A = new Vector(CA.end.getX(), CA.end.getY());
+				
+				
+				//vector BC
+				Line CB = new Line(C, B);
+				CB.scale(factor);
+				B = new Vector(CB.end.getX(), CB.end.getY());
+				
+				//BD vector
+				CD = new Line(C, D);
+				CD.scale(factor);
+				D = new Vector(CD.end.getX(), CD.end.getY());
+											
+				//new points mutation
+				/*
+				 * B" is new A
+				 * C" is new B
+				 * D" is new C
+				 * A" is new D
+				 */
+				
+				
+				DA = new Line(A, B);
+				BC = new Line(C, D);
+				CD = new Line(D, A);
+				AB = new Line(B, C);
+				
+			
+	
+	
 
 		//out
 		node.AB = AB;
@@ -332,8 +334,7 @@ public class TreeController {
 			node.level = level;
 			getVector(node, rotateSide);
 		}
-				
-		
+						
 		if (s < Constants.Iteration ) {
 			
 			node.left = node;
@@ -346,128 +347,7 @@ public class TreeController {
 		
 		return node;
 	}
-	
-	
-/*	//create tree structure with parents informations
-	private  int counter = 0;
-	public TreeNodeExtended<Line> _createTree( int size, TreeNodeExtended<Line> parent,boolean rotateSide)  {
-		TreeNodeExtended<Line> node = new TreeNodeExtended<Line>();
-		
-		if(size!=0) {
-			node.level = size;
-			
-			node.AB = parent.AB;
-			node.BC = parent.BC;
-			node.CD = parent.CD;
-			node.DA = parent.DA;
-						
-			//getNewVector(node);								
-			
-			
-		}else {			
-			//for root node for next calculations 
-			node.AB = parent.AB;
-			node.BC = parent.BC;
-			node.CD = parent.CD;
-			node.DA = parent.DA;			
-		}
-	
-				
-		node.parent = parent;
-		node.count = counter++ ;
-		node.rotateSide = rotateSide;
-		
-		if (size < Constants.Iteration) {
-			node.setLeft(_createTree(size + 1,  node, false));
-			node.setRight(_createTree(size + 1, node, true));
-		}
-		return node;
-	}
-	*/
-	
-	/*
-	 * put elements to TreeNodeExtended list
-	 * 
-	 */
-	/*
-	private void putNodeList(TreeNodeExtended<Line> node, List<TreeNodeExtended<Line>> listNode) {				
-		if (node.left != null) {												
-			listNode.add(node);
-			putNodeList((TreeNodeExtended<Line>) node.left, listNode);
-		}
-		if (node.right != null) {
-			listNode.add(node);
-			putNodeList((TreeNodeExtended<Line>) node.right, listNode);
-		}
-		// last Node
-		if (node.right == null) {
-			listNode.add(node);
-		}
-	}
-	
-	private List<TreeNodeExtended<Line>> fillShapes(List<TreeNodeExtended<Line>> listNode)  {
-		
-		int lastLevel = 0;
-		TreeNodeExtended<Line> node = new TreeNodeExtended<Line>();
-		TreeNodeExtended<Line> parent = new TreeNodeExtended<Line>();
-		
-		//start from second node, first node has coordinates 
-		for(int i=1; i < listNode.size(); i++) {
-			
-			
-			
-			//only descents routes
-			if(listNode.get(i).level >= lastLevel) {
-				//System.out.println(listNode.get(i).level);	
-			}			
-			lastLevel = listNode.get(i).level;
-			
-						
-			
-			/*
-			TreeNodeExtended<VectorExtended> node = new TreeNodeExtended<VectorExtended>();
-			node = listNode.get(i);
-			
-			if(node != null){
-				if(node.level==0) {								
-					// do nothing root
-				}else{												
-					if(node.parent.level + 1 == node.level) {
-						ArrayList<VectorExtended> vectorList = new ArrayList<VectorExtended>();										
-						
-						vectorList = getNewVector(vectorList, node.rotateSide);		
-						
-						node.AB = vectorList.get(0);//AB
-						node.BC = vectorList.get(1); //BC
-						node.CD = vectorList.get(2); //CD
-						node.DA = vectorList.get(3); //DA										
-					}
-				}								
-			}
-			
-									
-		}
-		
-		return listNode;
-	}
-	*/
 
-			
-		/*
-		MatrixExtended currentMatrix = new MatrixExtended(1, 2);
-		currentMatrix.set(0, 0, line.getX());
-		currentMatrix.set(0, 1, line.getY());
-		
-		
-		if(turnSide == true) {
-			currentMatrix.rotateRight(Constants.Angle);
-		}else {
-			currentMatrix.rotateLeft(Constants.Angle) ;
-		}		
-		
-		line.setX(currentMatrix.get(0, 0));
-		line.setY(currentMatrix.get(0, 1));
-		*/
 	
 }
 

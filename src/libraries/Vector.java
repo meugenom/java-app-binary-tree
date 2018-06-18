@@ -74,6 +74,12 @@ public class Vector{
     }
     
     
+    public void translate(double w, double h) {
+    	this.setX(this.getX() + w);
+    	this.setY(this.getY() + h);
+    	
+    }
+    
     public double getAngleBetweenVectors (Vector b) {    
         
         double grad1 = changeSign(calculateAngle(this.y,this.x));
