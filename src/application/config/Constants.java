@@ -15,8 +15,8 @@ public final class Constants {
     
     
     //quadrants sides a,b 
-    public static double a = 150.0;
-    public static double b = 150.0;
+    public static double a = 120.0;
+    public static double b = 120.0;
     		    
     public static double pointAX = 360.0;
     public static double pointAY = 490.0;

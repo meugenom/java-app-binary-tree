@@ -48,13 +48,10 @@ public class DrawShapesController {
 	
 	private void drawSquare (GraphicsContext gc, TreeNodeExtended<Line> node) {
 		
-		//gc.moveTo(node.AB.start.getX(), node.AB.start.getY());
 		gc.strokeLine(node.AB.start.getX(), node.AB.start.getY(), node.AB.end.getX(), node.AB.end.getY());
 		gc.strokeLine(node.BC.start.getX(), node.BC.start.getY(), node.BC.end.getX(), node.BC.end.getY());
 		gc.strokeLine(node.CD.start.getX(), node.CD.start.getY(), node.CD.end.getX(), node.CD.end.getY());
 		gc.strokeLine(node.DA.start.getX(), node.DA.start.getY(), node.DA.end.getX(), node.DA.end.getY());		
-		
-		
 		
 	}
 	
