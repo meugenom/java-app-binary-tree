@@ -27,7 +27,6 @@ public class TreeDataModel {
 	}
 		
     
-	
 	public TreeNodeExtended<Line> start() {
 		
 		//declare values as first quadrant
