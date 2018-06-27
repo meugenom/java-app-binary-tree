@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Control?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane fx:controller="application.components.label.LabelController" xmlns:fx="http://javafx.com/fxml/1">
+	<Label   translateX="20" fx:id="levelLabel"/>
+</StackPane>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.Path?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.components.tree.TreeController"
+	minWidth="100">
+	<left>	
+		<VBox>
+			<TextField fx:id="levelField" />
+			<TextField fx:id="angleField" />
+			<TextField fx:id="widthField" />
+			<TextField fx:id="heightField" />
+			<Button fx:id="startButton" onAction="#handleStartButtonAction"
+				text="Run" />
+			<Button fx:id="exportButton"
+				onAction="#handleExportButtonAction" text="Export SVG" />
+			<!-- <Button text='breakpointa dasa as das da dsad d sadsa sa asd' onAction='#breakpointAction'/> -->
+		</VBox>		
+	</left>
+	<center>
+		<Canvas fx:id="canvas" height="400" width="600" />
+		<!-- <Pane fx:id='canvasContainer'>
+			<Canvas fx:id="canvas" width='${canvasContainer.width}' height='${canvasContainer.height}'/>
+		</Pane>-->
+	</center>
+</BorderPane>

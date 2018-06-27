@@ -1,7 +1,6 @@
 package application.extended;
 
 import libraries.TreeNode;
-import libraries.Vector;
 
 public class TreeNodeExtended<T> extends TreeNode<T>{
 

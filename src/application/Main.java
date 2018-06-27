@@ -1,67 +1,54 @@
 package application;
 	
-
-import java.util.ArrayList;
-import java.util.List;
-
-import application.config.Constants;
-import application.controllers.DrawShapesController;
-import application.controllers.TreeController;
-import application.extended.Line;
-import application.extended.TreeNodeExtended;
+import application.components.label.LabelController;
+import application.components.tree.TreeController;
+import application.config.Config;
+import application.model.TreeDataModel;
 import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.FlowPane;
 import javafx.fxml.FXMLLoader;
-
-import libraries.Vector;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 
 public class Main extends Application {
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+						
+			TreeDataModel treeDataModel = new TreeDataModel();			
+			BorderPane root = new BorderPane();
+						
+			root.setStyle("-fx-background-color: DAE6F3;-fx-border-color: black;");				
+		    						
+			FXMLLoader labelLoader = new FXMLLoader(getClass().getResource("components/label/Label.fxml"));
+			root.getChildren().add(labelLoader.load());
+			// root.setTop(labelLoader.load());
+			LabelController labelController = labelLoader.getController();
+			labelController.start(treeDataModel, root);
 			
-			final Canvas canvas = new Canvas(Constants.CanvasWidth, Constants.CanvasHeight);
-												
-			drawShapes(canvas);												
+
+			FXMLLoader treeLoader = new FXMLLoader(getClass().getResource("components/tree/Tree.fxml"));
+			root.getChildren().add(treeLoader.load());
+			// root.setCenter(treeLoader.load());
+			TreeController treeController = treeLoader.getController();
+			treeController.start(treeDataModel, root);
 			
-			//Visualization
-			FlowPane root = (FlowPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
-			root.getChildren().addAll(canvas);
+									
+			Scene scene = new Scene(root, Config.SceneWidth, Config.SceneHeight);			
+			scene.getStylesheets().add(getClass().getResource("scene.css").toExternalForm());									
 			
-			Scene scene = new Scene(root, Constants.SceneWidth, Constants.SceneHeight);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			
 			primaryStage.setScene(scene);
-			primaryStage.setTitle(Constants.ApplicationName + Constants.Version);
+			primaryStage.setTitle(Config.ApplicationName + Config.Version);
 			primaryStage.show();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	private void drawShapes( final Canvas canvas) throws Exception{
-		final GraphicsContext gc = canvas.getGraphicsContext2D();					
-		
-		//calculation our tree
-		TreeController calculateTree = new TreeController();
-		TreeNodeExtended<Line> node = new TreeNodeExtended<Line>();
-		node = calculateTree.main();
-		
-		//draw shapes
-		DrawShapesController drawShapes = new DrawShapesController();
-		drawShapes.draw(gc, node);
-				
-		// graphics content apply
-		gc.stroke();
-						
-	} 
-		
 	
 	
 	public static void main(String[] args) {

@@ -23,6 +23,14 @@ public class Line {
 	}
 	
 	public void  scale(double factor) {
+		
+		
+		this.end.setX((this.end.getX() - this.start.getX())*factor + this.start.getX());
+		this.end.setY((this.end.getY() - this.start.getY())*factor + this.start.getY());
+				
+	}
+	
+	public void  _scale(double factor) {
 		this.end.setX((this.end.getX() - this.start.getX())*factor + this.start.getX());
 		this.end.setY((this.end.getY() - this.start.getY())*factor + this.start.getY());
 				

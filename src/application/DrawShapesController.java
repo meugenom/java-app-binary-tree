@@ -1,4 +1,4 @@
-package application.controllers;
+package application;
 
 import application.extended.TreeNodeExtended;
 import application.extended.Line;
@@ -7,16 +7,20 @@ import javafx.scene.paint.Color;
 
 
 public class DrawShapesController {
+	
+	
+	public DrawShapesController() {
+		
+	}
 
 	public void draw(GraphicsContext gc, TreeNodeExtended<Line> node) {
-		
+					
 		//settings for context
-		gc.setStroke(Color.ORANGE);
+		gc.setStroke(Color.PURPLE);
 		gc.setLineWidth(1);
 		
 		//draw first quadrant  		
-		drawSquare(gc, node);
-		
+		drawSquare(gc, node);		
 		putContext(gc, node);
 		
 	}
@@ -47,11 +51,18 @@ public class DrawShapesController {
 	}
 	
 	private void drawSquare (GraphicsContext gc, TreeNodeExtended<Line> node) {
-		
+				
 		gc.strokeLine(node.AB.start.getX(), node.AB.start.getY(), node.AB.end.getX(), node.AB.end.getY());
 		gc.strokeLine(node.BC.start.getX(), node.BC.start.getY(), node.BC.end.getX(), node.BC.end.getY());
 		gc.strokeLine(node.CD.start.getX(), node.CD.start.getY(), node.CD.end.getX(), node.CD.end.getY());
-		gc.strokeLine(node.DA.start.getX(), node.DA.start.getY(), node.DA.end.getX(), node.DA.end.getY());		
+		gc.strokeLine(node.DA.start.getX(), node.DA.start.getY(), node.DA.end.getX(), node.DA.end.getY());
+								
+		/*
+		gc.strokeLine(	(node.AB.start.getX() + node.AB.end.getX())/2, 
+						(node.AB.start.getY() + node.AB.end.getY())/2,
+						(node.CD.start.getX() + node.CD.end.getX())/2, 
+						(node.CD.start.getY() + node.CD.end.getY())/2);
+		*/				
 		
 	}
 	
